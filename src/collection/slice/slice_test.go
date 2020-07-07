@@ -47,7 +47,10 @@ func TestSliceShareMemory(t *testing.T) {
 	end := s[11:]
 	t.Log(end, len(end), cap(end))
 	end = append(end, "append")
+	// 截取后的切片扩容后,源切片会有什么影响
 	t.Log(end, len(end), cap(end))
+	// 当截取后的切片扩容后,源切片的len和cap不会变化
+	t.Log(s, len(s), cap(s))
 }
 
 // 切片数据对比
@@ -63,6 +66,6 @@ func TestSliceInitDiff(t *testing.T) {
 	var a []int
 	b := []int{}
 	t.Log(a, a == nil, b, b == nil)
-	a = append(a,1)
+	a = append(a, 1)
 	t.Log(a)
 }
