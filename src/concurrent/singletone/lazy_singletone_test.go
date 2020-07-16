@@ -45,5 +45,6 @@ func TestGetSingleToneObject(t *testing.T) {
 	// 空的struct对象
 	t.Log(struct{}{} == struct{}{})
 	t.Logf("%p", &EmptyObjectSingleton1{})
+	t.Logf("%p", &EmptyObjectSingleton1{})
 	t.Logf("%p", &EmptyObjectSingleton2{})
 }
