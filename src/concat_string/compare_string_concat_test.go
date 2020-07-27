@@ -90,6 +90,11 @@ func TestMapStructType(t *testing.T) {
 	editStructMap(m)
 	// 1
 	t.Log(m["1"].i)
+	// 从这里可以看出来,当map存储的是struct实例时,实际值复制
+	v, _ := m["1"]
+	v.i = 3
+	t.Log(m["1"].i)
+	t.Log(v)
 	refm := map[string]*T{"1": {1}}
 	editStructRefMap(refm)
 	// 2
