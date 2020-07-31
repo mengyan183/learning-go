@@ -107,4 +107,5 @@ func TestSliceAutoIncr(t *testing.T) {
 	t.Log(unsafe.Pointer(&s),len(s),cap(s))
 	// 这里是调用 /usr/local/Cellar/go/1.14.5/libexec/src/reflect/value.go:1429
 	t.Logf("%p\n",s)
+	t.Logf("%p\n",&s)
 }
