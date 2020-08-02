@@ -109,3 +109,13 @@ func TestSliceAutoIncr(t *testing.T) {
 	t.Logf("%p\n",s)
 	t.Logf("%p\n",&s)
 }
+
+func TestDeclareSlice(t *testing.T) {
+	// 对于只声明未定义的容器而言,由于实际数据存储的空间尚未开辟,所以无法执行数据写入操作
+	var s []string
+	//t.Log(s[0])
+	//s[0] = "1"
+	t.Log(s)
+	s = append(s,"1")
+	t.Log(s)
+}
