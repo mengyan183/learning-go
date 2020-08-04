@@ -1,6 +1,8 @@
 package array_slice
 
 import (
+	"fmt"
+	"github.com/stretchr/testify/assert"
 	"sync"
 	"testing"
 	"unsafe"
@@ -72,4 +74,25 @@ func TestSyncMap(t *testing.T) {
 		t.Log(key, value)
 		return true
 	})
+}
+
+func TestDeclareInitWithSource(t *testing.T) {
+	//var m1 map[int]int
+	//m1[1] = 1
+	var m map[string]string
+	//m["1"] = "1"
+	//_,_=m["1"]
+	_=m["1"]
+}
+
+func TestFn4(t *testing.T) {
+	assert.Equal(t,5,f4())
+}
+func f4() (x int) {
+	defer func(x int) {
+		// 操作的是局部变量,而不是返回值x
+		x++
+		fmt.Println(x)
+	}(x)// 这里压入栈的x的值为0
+	return 5 // 这里的操作实际可以解析为 返回值x = 5 defer函数 return
 }

@@ -80,3 +80,23 @@ func TestDeferReturn(t *testing.T) {
 	i := deferReturn()
 	assert.Equal(t, 2, i)
 }
+
+func getFn() func() int {
+	x := 0
+	return func() int {
+		x++
+		return x
+	}
+}
+
+// 闭包测试
+func TestGetFn(t *testing.T) {
+	// 在返回的fn函数中实际 getFn()中的局部变量x并未消亡,而是随着返回的函数一起返回作为返回函数的全局变量
+	fn := getFn()
+	// 因此没调用一次fn ,都会执行x++操作
+	t.Log(fn())
+	t.Log(fn())
+	// 而当重新执行getFn时,实际是重新生成了新的闭包,因此x又重置为0
+	fn = getFn()
+	t.Log(fn())
+}
