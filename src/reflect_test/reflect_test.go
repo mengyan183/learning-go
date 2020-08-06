@@ -16,7 +16,7 @@ type ReflectStructPeople struct {
 	age  int
 }
 
-func (rsp *ReflectStructPeople) ToString() {
+func (rsp ReflectStructPeople) ToString() {
 	fmt.Printf("{\"name\":%s,\"age\":%d}\n", rsp.name, rsp.age)
 }
 
@@ -54,8 +54,12 @@ func TestReflectStruct(t *testing.T) {
 		name: "cs",
 		age:  10,
 	}
+	(&s).ToString()
+	s.ToString()
+	s.SetName("1")
 	t.Log(reflect.ValueOf(s).FieldByName("name"))
 	reflect.ValueOf(&s).MethodByName("ToString").Call([]reflect.Value{})
+	reflect.ValueOf(s).MethodByName("ToString").Call([]reflect.Value{})
 	// 由于set方法是指针修改,未执行值复制,因此修改的是相同内存地址的值
 	reflect.ValueOf(&s).MethodByName("SetName").Call([]reflect.Value{reflect.ValueOf("修改名称")})
 	s.ToString()

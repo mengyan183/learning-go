@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
+	"unsafe"
 )
 
 type ForReflect struct {
@@ -14,6 +15,23 @@ type ForReflect struct {
 func (fr *ForReflect) ToString() string {
 	return fmt.Sprint(fr)
 }
+
+func TestValueAndPtr(t *testing.T) {
+	fr := ForReflect{
+		Name: "xingguo",
+		Age:  18,
+	}
+	t.Logf("%p\n",&fr)
+	t.Logf("%p\n",&(fr.Name))
+	t.Logf("%p\n",&(fr.Age))
+	t.Log(unsafe.Pointer(&(fr.Name)))
+	frc := fr
+	t.Logf("%p\n",&frc)
+	t.Logf("%p\n",&(frc.Name))
+	t.Log(unsafe.Pointer(&(frc.Name)))
+	t.Log(unsafe.Pointer(&fr))
+}
+
 func TestReflectMethod(t *testing.T) {
 	fr := ForReflect{
 		Name: "xingguo",
